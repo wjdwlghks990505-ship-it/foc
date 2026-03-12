@@ -5,53 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>손실 없는 투자 원칙 VIP (포커스)</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Montserrat:wght@900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Montserrat:wght@900&family=JetBrains+Mono:wght@700&display=swap');
         
+        /* [배경: 미드나잇 네이비 블랙 적용] */
         body { 
             font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; 
             background: #00020a; color: #f8fafc; overflow-x: hidden; word-break: keep-all; position: relative;
         }
 
-        /* [배경: 흩날리는 우주 별빛] */
+        /* 배경 효과 */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px), radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
             background-size: 550px 550px, 350px 350px;
             animation: backgroundStarMove 60s linear infinite; opacity: 0.3; z-index: 0;
         }
-        @keyframes backgroundStarMove { from { background-position: 0 0, 40px 60px; } to { background-position: -1000px 500px, -600px 200px; } }
+        @keyframes backgroundStarMove { from { background-position: 0 0; } to { background-position: -1000px 500px; } }
 
-        /* [배경: 다이아몬드 네온 라인] */
         .neon-lines {
             position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
             background-image: linear-gradient(45deg, rgba(251, 191, 36, 0.07) 1px, transparent 1px), linear-gradient(-45deg, rgba(251, 191, 36, 0.07) 1px, transparent 1px);
-            background-size: 60px 60px; z-index: 1; animation: diamondMove 20s linear infinite; perspective: 1000px;
+            background-size: 60px 60px; z-index: 1; animation: diamondMove 20s linear infinite;
         }
         @keyframes diamondMove { 0% { transform: translate(0, 0) rotateX(20deg); } 100% { transform: translate(60px, 60px) rotateX(20deg); } }
 
-        /* [로고 & 회전 다이아몬드 심볼 - 펄스 광채 추가] */
+        /* [로고: 다이아몬드 안 원형 복구] */
         .logo-wrapper { padding: 80px 0 20px; text-align: center; position: relative; z-index: 10; }
-        .brand-logo { 
-            display: inline-flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; 
-            /* 로고 전체에 은은한 펄스 광채 추가 */
-            animation: logo-glow-pulse 4s infinite ease-in-out;
+        .brand-logo { display: inline-flex; align-items: center; justify-content: center; animation: logo-glow-pulse 4s infinite ease-in-out; }
+        .logo-text { font-size: 42px; letter-spacing: 0.15em; color: #fff; text-shadow: 0 0 10px #fff; font-weight: 900; margin-right: 15px; }
+        .logo-symbol { 
+            width: 38px; height: 38px; border: 4px solid #fbbf24; border-radius: 8px; 
+            transform: rotate(45deg); box-shadow: 0 0 15px #fbbf24; animation: symbol-rotate 4s infinite;
+            position: relative;
         }
-        .logo-text { font-size: 42px; letter-spacing: 0.15em; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px rgba(251, 191, 36, 0.5); font-weight: 900; margin-right: 15px; }
-        .logo-symbol {
-            width: 38px; height: 38px; border: 4px solid #fbbf24; border-radius: 8px;
-            position: relative; transform: rotate(45deg);
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
-            animation: symbol-rotate 4s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+        .logo-symbol::after {
+            content: ''; position: absolute; top: 50%; left: 50%; 
+            transform: translate(-50%, -50%); width: 12px; height: 12px; 
+            background: #fbbf24; border-radius: 50%; box-shadow: 0 0 8px #fbbf24;
         }
-        .logo-symbol::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background: #fbbf24; border-radius: 50%; box-shadow: 0 0 10px #fbbf24; }
-        @keyframes symbol-rotate { 0% { transform: rotate(45deg); } 80% { transform: rotate(405deg); } 100% { transform: rotate(405deg); } }
-        
-        /* 로고 펄스 애니메이션 */
-        @keyframes logo-glow-pulse {
-            0% { filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.3)); }
-            50% { filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8)); }
-            100% { filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.3)); }
-        }
+        @keyframes symbol-rotate { 0% { transform: rotate(45deg); } 80%, 100% { transform: rotate(405deg); } }
+        @keyframes logo-glow-pulse { 0%, 100% { filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.3)); } 50% { filter: drop-shadow(0 0 25px rgba(251, 191, 36, 0.9)); } }
 
         header { text-align: center; padding: 10px 20px 100px; position: relative; z-index: 10; }
         h1 { font-size: 36px; font-weight: 900; line-height: 1.3; color: #fff; }
@@ -59,59 +52,68 @@
         
         .container { max-width: 500px; margin: -70px auto 30px; position: relative; z-index: 10; padding: 0 20px; }
 
-        /* [혜택 박스 - 더 화려하게, 펄스 네온 효과] */
+        /* [혜택 박스: 리얼 골드 배경 + 딥 레드 숫자 강조] */
         .benefit-box { 
-            background: rgba(251, 191, 36, 0.05); padding: 30px 15px; border-radius: 24px; text-align: center; 
-            border: 2px solid #fbbf24; margin-bottom: 30px; backdrop-filter: blur(10px);
-            /* 숨쉬듯 깜빡이는 효과 추가 */
-            animation: benefit-glow-pulse 2.5s infinite ease-in-out;
+            background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24); 
+            padding: 30px 15px; border-radius: 24px; text-align: center; 
+            border: 2px solid #fff; margin-bottom: 30px; 
+            box-shadow: 0 0 35px rgba(251, 191, 36, 0.7);
         }
-        .benefit-val { font-size: 26px; font-weight: 900; color: #fbbf24; display: block; margin-top: 5px; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
-        
-        /* 혜택 박스 펄스 애니메이션 */
-        @keyframes benefit-glow-pulse {
-            0% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.2), inset 0 0 5px rgba(251, 191, 36, 0.1); }
-            50% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.6), inset 0 0 15px rgba(251, 191, 36, 0.3); }
-            100% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.2), inset 0 0 5px rgba(251, 191, 36, 0.1); }
+        .benefit-label { font-size: 13px; font-weight: 700; color: #1a1a1a; display: block; margin-bottom: 8px; }
+        .benefit-val { 
+            font-size: 28px; font-weight: 900; 
+            color: #b91c1c; /* 딥 레드 강조 */
+            display: block;
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
         }
 
-        /* [홍보 및 체크리스트] */
-        .promo-box { background: rgba(7, 10, 20, 0.8); padding: 30px 25px; border-radius: 24px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 30px; backdrop-filter: blur(15px); }
+        /* [홍보 문구: 골드 톤 변경 및 펄스 효과] */
+        .promo-box { 
+            background: rgba(7, 10, 20, 0.8); padding: 30px 25px; border-radius: 24px; text-align: center; 
+            border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 30px; 
+            animation: promo-glow-pulse 3s infinite ease-in-out;
+        }
+        @keyframes promo-glow-pulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(251, 191, 36, 0.6); }
+        }
+        .promo-main { 
+            font-size: 21px; font-weight: 900; color: #fbbf24; 
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+            display: block; margin-bottom: 14px; 
+        }
+
+        /* [체크리스트: 다이아몬드 골드 아이콘 적용] */
         .content-section { background: rgba(255, 255, 255, 0.02); padding: 35px 25px; border-radius: 24px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.05); }
         .point-item { display: flex; align-items: flex-start; margin-bottom: 22px; font-size: 16px; color: #e2e8f0; }
-        .point-item span { color: #fbbf24; margin-right: 15px; font-size: 18px; text-shadow: 0 0 5px rgba(251,191,36,0.5); }
-
-        /* [Tally 폼 테두리 - 불빛났다 안났다 하는 네온 펄스 효과 유지] */
-        .form-wrap {
-            position: relative; padding: 8px; border-radius: 25px;
-            background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24);
-            background-size: 200% 200%; animation: border-sparkle 3s infinite linear, form-glow-pulse 2s infinite ease-in-out;
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+        .point-icon {
+            width: 14px; height: 14px; border: 2.5px solid #fbbf24; border-radius: 3px;
+            transform: rotate(45deg); box-shadow: 0 0 8px #fbbf24;
+            display: inline-block; margin-right: 18px; margin-top: 5px;
+            animation: symbol-rotate 4s infinite;
+            position: relative;
         }
-        @keyframes border-sparkle { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
-        @keyframes form-glow-pulse { 0% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); } 50% { box-shadow: 0 0 50px rgba(251, 191, 36, 0.8); } 100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); } }
+        .point-icon::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 4.5px; height: 4.5px; background: #fbbf24; border-radius: 50%; }
+
+        /* 폼 영역 */
+        .form-wrap { position: relative; padding: 8px; border-radius: 25px; background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24); animation: form-glow 2s infinite ease-in-out; }
+        @keyframes form-glow { 0%, 100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); } 50% { box-shadow: 0 0 50px rgba(251, 191, 36, 0.8); } }
         iframe { width: 100%; height: 500px; border-radius: 20px; border: none; background: #000; display: block; }
 
-        /* [방문자 카운터 - 화려하게, 펄스 네온 효과] */
-        .counter-section { margin-top: 40px; text-align: center; }
-        .counter-badge {
-            display: inline-block; padding: 8px 25px; border: 2.2px solid #d4af37; 
-            border-radius: 8px; background: rgba(0,0,0,0.8); color: #d4af37; font-size: 24px; font-weight: bold;
-            /* 숨쉬듯 깜빡이는 효과 추가 */
-            animation: counter-glow-pulse 3s infinite ease-in-out;
+        /* [하단 시계: KST 문구 포함] */
+        .clock-section { margin-top: 50px; text-align: center; padding-bottom: 20px; }
+        .clock-label { 
+            color: #fbbf24; font-size: 11px; letter-spacing: 3px; margin-bottom: 8px; 
+            display: block; font-weight: 700; text-shadow: 0 0 5px rgba(251, 191, 36, 0.4);
         }
-        @keyframes blink-animation { to { visibility: hidden; } }
-        .counter-title { color: #64748b; font-size: 13px; letter-spacing: 3px; margin-bottom: 12px; font-weight: 700; text-shadow: 0 0 5px rgba(100,116,139,0.3); }
-        
-        /* 카운터 펄스 애니메이션 */
-        @keyframes counter-glow-pulse {
-            0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
-            50% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.7); }
-            100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+        .clock-badge { 
+            display: inline-block; padding: 10px 25px; border: 1.5px solid rgba(251, 191, 36, 0.5); 
+            border-radius: 10px; background: rgba(0, 0, 0, 0.6); color: #fbbf24; 
+            font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: bold; 
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
         }
-        .live-text { font-size: 14px; margin-right: 8px; animation: blink-animation 1s steps(2, start) infinite; vertical-align: middle; }
 
-        .footer { text-align: center; font-size: 11px; color: #475569; padding: 50px 0; }
+        .footer { text-align: center; font-size: 11px; color: #475569; padding: 30px 0; }
     </style>
 </head>
 <body>
@@ -122,58 +124,64 @@
     <div class="logo-wrapper">
         <div class="brand-logo"><span class="logo-text">FOCUS</span><div class="logo-symbol"></div></div>
     </div>
-    <span style="color: #fbbf24; font-weight: 700; font-size: 14px; letter-spacing: 4px; margin-bottom: 15px; display: block; text-shadow: 0 0 5px rgba(251,191,36,0.5);">PREMIUM INVESTMENT PRINCIPLE</span>
+    <span style="color: #fbbf24; font-weight: 700; font-size: 14px; letter-spacing: 4px; margin-bottom: 15px; display: block;">PREMIUM INVESTMENT PRINCIPLE</span>
     <h1>손실 없는 투자 원칙<br><span class="gold">VIP (포커스)</span></h1>
 </header>
 
 <div class="container">
     <div class="benefit-box">
         <div style="display: flex; justify-content: space-around; align-items: center;">
-            <div><span style="font-size: 13px;">초기 매입금 지원</span><span class="benefit-val">20% 즉시지급</span></div>
-            <div style="width: 1px; height: 50px; background: rgba(251,191,36,0.3);"></div>
-            <div><span style="font-size: 13px;">해외선물 수수료</span><span class="benefit-val">$2.0 최저가</span></div>
+            <div>
+                <span class="benefit-label">초기 매입금 지원</span>
+                <span class="benefit-val">20% 즉시지급</span>
+            </div>
+            <div style="width: 1px; height: 50px; background: rgba(0,0,0,0.1);"></div>
+            <div>
+                <span class="benefit-label">해외선물 수수료</span>
+                <span class="benefit-val">$2.0 최저가</span>
+            </div>
         </div>
     </div>
 
     <div class="promo-box">
-        <span style="font-size: 21px; font-weight: 900; color: #fff; display: block; margin-bottom: 14px;">[변동성 시장의 해답, 해외 선물]</span>
+        <span class="promo-main">[변동성 시장의 해답, 해외 선물]</span>
         <span style="color: #cbd5e1; font-size: 17px; line-height: 1.6;">복잡한 시장 분석은 전문가에게 맡기시고,<br>당신은 수익에 집중하세요!</span>
     </div>
 
     <div class="content-section">
-        <div class="point-item"><span>✔</span> 상방/하방 구애받지 않는 '양방향' 타점 실시간 공유</div>
-        <div class="point-item"><span>✔</span> 해외선물 수익 극대화를 위한 체계적 리스크 헷지</div>
-        <div class="point-item"><span>✔</span> 수년간 검증된 포커스만의 독보적인 시장 분석 노하우</div>
-        <div class="point-item"><span>✔</span> 실시간 시장 이슈 브리핑 및 대응 전략 제시</div>
-        <div class="point-item"><span>✔</span> 1:1 맞춤형 무료 교육 서비스</div>
+        <div class="point-item"><div class="point-icon"></div><span>상방/하방 구애받지 않는 '양방향' 타점 실시간 공유</span></div>
+        <div class="point-item"><div class="point-icon"></div><span>해외선물 수익 극대화를 위한 체계적 리스크 헷지</span></div>
+        <div class="point-item"><div class="point-icon"></div><span>수년간 검증된 포커스만의 독보적인 시장 분석 노하우</span></div>
     </div>
 
     <div style="text-align: center;">
-        <p style="color: #fbbf24; margin-bottom: 25px; font-weight: 900; font-size: 20px; text-shadow: 0 0 15px rgba(251,191,36,0.6);">▼ 실시간 VIP 상담 신청 ▼</p>
+        <p style="color: #fbbf24; margin-bottom: 25px; font-weight: 900; font-size: 20px;">▼ 실시간 VIP 상담 신청 ▼</p>
         <div class="form-wrap">
             <iframe src="https://tally.so/embed/2EkdBM?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
         </div>
     </div>
 
-    <div class="counter-section">
-        <p class="counter-title">TOTAL VISITORS</p>
-        <div class="counter-badge"><span class="live-text">● LIVE</span> <span id="visit-number">1,053</span></div>
+    <div class="clock-section">
+        <span class="clock-label">KOREA STANDARD TIME</span>
+        <div class="clock-badge" id="live-clock">00:00:00</div>
     </div>
 
     <div class="footer">ⓒ VIP FOCUS PRINCIPLE. All Rights Reserved.</div>
 </div>
 
 <script>
-    function updateCounter() {
-        let count = parseInt(localStorage.getItem('focus_total_count')) || 1053;
-        if (!localStorage.getItem('focus_real_visit')) {
-            count += 1;
-            localStorage.setItem('focus_total_count', count);
-            localStorage.setItem('focus_real_visit', Date.now());
-        }
-        document.getElementById('visit-number').innerText = count.toLocaleString();
+    function updateClock() {
+        const now = new Date();
+        const kstOffset = 9 * 60 * 60 * 1000;
+        const utc = now.getTime() + (now.getTimezoneOffset() * 60 * 1000);
+        const kstTime = new Date(utc + kstOffset);
+        const hours = String(kstTime.getHours()).padStart(2, '0');
+        const minutes = String(kstTime.getMinutes()).padStart(2, '0');
+        const seconds = String(kstTime.getSeconds()).padStart(2, '0');
+        document.getElementById('live-clock').innerText = `${hours}:${minutes}:${seconds}`;
     }
-    updateCounter();
+    setInterval(updateClock, 1000);
+    updateClock();
 </script>
 
 </body>
