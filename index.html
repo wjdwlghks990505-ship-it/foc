@@ -3,152 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VIP FOCUS PRINCIPLE</title>
+    <title>손실 없는 투자 원칙 VIP (포커스)</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Montserrat:wght@900&display=swap');
         
         body { 
             font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; 
-            background: #000; color: #fff; overflow-x: hidden; word-break: keep-all;
+            background: #00020a; color: #f8fafc; overflow-x: hidden; word-break: keep-all; position: relative;
         }
 
-        /* [움직이는 배경] */
+        /* [배경: 흩날리는 우주 별빛] */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(white, rgba(255,255,255,.1) 1.5px, transparent 2px);
-            background-size: 400px 400px; animation: backgroundStarMove 60s linear infinite;
-            opacity: 0.2; z-index: 0;
+            background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px), radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
+            background-size: 550px 550px, 350px 350px;
+            animation: backgroundStarMove 60s linear infinite; opacity: 0.3; z-index: 0;
         }
-        @keyframes backgroundStarMove { from { background-position: 0 0; } to { background-position: -1000px 500px; } }
+        @keyframes backgroundStarMove { from { background-position: 0 0, 40px 60px; } to { background-position: -1000px 500px, -600px 200px; } }
 
-        /* [FOCUS 로고 애니메이션] */
-        .logo-wrapper { padding: 60px 0 20px; text-align: center; position: relative; z-index: 10; }
-        .brand-logo { display: inline-flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; }
-        .logo-text { font-size: 42px; letter-spacing: 0.15em; color: #fff; text-shadow: 0 0 10px rgba(251, 191, 36, 0.8); margin-right: 12px; font-weight: 900; }
+        /* [배경: 다이아몬드 네온 라인] */
+        .neon-lines {
+            position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
+            background-image: linear-gradient(45deg, rgba(251, 191, 36, 0.07) 1px, transparent 1px), linear-gradient(-45deg, rgba(251, 191, 36, 0.07) 1px, transparent 1px);
+            background-size: 60px 60px; z-index: 1; animation: diamondMove 20s linear infinite; perspective: 1000px;
+        }
+        @keyframes diamondMove { 0% { transform: translate(0, 0) rotateX(20deg); } 100% { transform: translate(60px, 60px) rotateX(20deg); } }
+
+        /* [로고 & 회전 다이아몬드 심볼 - 펄스 광채 추가] */
+        .logo-wrapper { padding: 80px 0 20px; text-align: center; position: relative; z-index: 10; }
+        .brand-logo { 
+            display: inline-flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; 
+            /* 로고 전체에 은은한 펄스 광채 추가 */
+            animation: logo-glow-pulse 4s infinite ease-in-out;
+        }
+        .logo-text { font-size: 42px; letter-spacing: 0.15em; color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px rgba(251, 191, 36, 0.5); font-weight: 900; margin-right: 15px; }
         .logo-symbol {
             width: 38px; height: 38px; border: 4px solid #fbbf24; border-radius: 8px;
-            position: relative; transform: rotate(45deg); animation: symbol-rotate 4s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            position: relative; transform: rotate(45deg);
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
+            animation: symbol-rotate 4s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
         }
-        @keyframes symbol-rotate { 0% { transform: rotate(45deg); } 100% { transform: rotate(405deg); } }
+        .logo-symbol::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background: #fbbf24; border-radius: 50%; box-shadow: 0 0 10px #fbbf24; }
+        @keyframes symbol-rotate { 0% { transform: rotate(45deg); } 80% { transform: rotate(405deg); } 100% { transform: rotate(405deg); } }
+        
+        /* 로고 펄스 애니메이션 */
+        @keyframes logo-glow-pulse {
+            0% { filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.3)); }
+            50% { filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.8)); }
+            100% { filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.3)); }
+        }
 
-        header { text-align: center; padding: 0 20px 80px; position: relative; z-index: 10; }
-        h1 { font-size: 34px; font-weight: 900; color: #fff; line-height: 1.3; margin: 0; }
-        .gold-txt { color: #fbbf24; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+        header { text-align: center; padding: 10px 20px 100px; position: relative; z-index: 10; }
+        h1 { font-size: 36px; font-weight: 900; line-height: 1.3; color: #fff; }
+        .gold { color: #fbbf24; text-shadow: 0 0 15px rgba(251, 191, 36, 0.5); }
+        
+        .container { max-width: 500px; margin: -70px auto 30px; position: relative; z-index: 10; padding: 0 20px; }
 
-        .container { max-width: 500px; margin: -50px auto 0; position: relative; z-index: 10; padding: 0 20px; }
-
-        /* [혜택 박스] */
-        .benefit-row { 
-            background: rgba(251, 191, 36, 0.05); padding: 25px 15px; border-radius: 20px; text-align: center; 
+        /* [혜택 박스 - 더 화려하게, 펄스 네온 효과] */
+        .benefit-box { 
+            background: rgba(251, 191, 36, 0.05); padding: 30px 15px; border-radius: 24px; text-align: center; 
             border: 2px solid #fbbf24; margin-bottom: 30px; backdrop-filter: blur(10px);
-            display: flex; justify-content: space-around;
+            /* 숨쉬듯 깜빡이는 효과 추가 */
+            animation: benefit-glow-pulse 2.5s infinite ease-in-out;
         }
-        .benefit-item span { font-size:12px; opacity:0.8; }
-        .benefit-item b { color: #fbbf24; font-size:19px; display: block; margin-top: 5px; }
-
-        /* [체크리스트 박스] */
-        .info-card {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 25px; border-radius: 20px; margin-bottom: 40px; line-height: 1.8; font-size: 14px; color: #ccc;
-        }
-        .point::before { content: '✔'; color: #fbbf24; font-weight: 700; margin-right: 10px; }
-
-        /* [신청서 섹션 - 움직이는 골드 테두리] */
-        .form-section { margin-top: 50px; text-align: center; position: relative; }
+        .benefit-val { font-size: 26px; font-weight: 900; color: #fbbf24; display: block; margin-top: 5px; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
         
-        /* 반짝이 애니메이션을 위한 외부 컨테이너 */
+        /* 혜택 박스 펄스 애니메이션 */
+        @keyframes benefit-glow-pulse {
+            0% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.2), inset 0 0 5px rgba(251, 191, 36, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.6), inset 0 0 15px rgba(251, 191, 36, 0.3); }
+            100% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.2), inset 0 0 5px rgba(251, 191, 36, 0.1); }
+        }
+
+        /* [홍보 및 체크리스트] */
+        .promo-box { background: rgba(7, 10, 20, 0.8); padding: 30px 25px; border-radius: 24px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 30px; backdrop-filter: blur(15px); }
+        .content-section { background: rgba(255, 255, 255, 0.02); padding: 35px 25px; border-radius: 24px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.05); }
+        .point-item { display: flex; align-items: flex-start; margin-bottom: 22px; font-size: 16px; color: #e2e8f0; }
+        .point-item span { color: #fbbf24; margin-right: 15px; font-size: 18px; text-shadow: 0 0 5px rgba(251,191,36,0.5); }
+
+        /* [Tally 폼 테두리 - 불빛났다 안났다 하는 네온 펄스 효과 유지] */
         .form-wrap {
-            position: relative; display: inline-block; width: 100%; max-width: 500px;
-            padding: 15px; border-radius: 25px;
-            
-            /* 핵심: 골드 그라데이션 테두리 */
-            background: linear-gradient(135deg, #fbbf24 0%, #d4af37 50%, #fbbf24 100%);
-            box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
-            
-            /* 테두리가 번쩍이며 돌아가는 애니메이션 */
-            background-size: 200% 200%;
-            animation: border-sparkle 3s infinite linear;
+            position: relative; padding: 8px; border-radius: 25px;
+            background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24);
+            background-size: 200% 200%; animation: border-sparkle 3s infinite linear, form-glow-pulse 2s infinite ease-in-out;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
         }
+        @keyframes border-sparkle { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+        @keyframes form-glow-pulse { 0% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); } 50% { box-shadow: 0 0 50px rgba(251, 191, 36, 0.8); } 100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); } }
+        iframe { width: 100%; height: 500px; border-radius: 20px; border: none; background: #000; display: block; }
+
+        /* [방문자 카운터 - 화려하게, 펄스 네온 효과] */
+        .counter-section { margin-top: 40px; text-align: center; }
+        .counter-badge {
+            display: inline-block; padding: 8px 25px; border: 2.2px solid #d4af37; 
+            border-radius: 8px; background: rgba(0,0,0,0.8); color: #d4af37; font-size: 24px; font-weight: bold;
+            /* 숨쉬듯 깜빡이는 효과 추가 */
+            animation: counter-glow-pulse 3s infinite ease-in-out;
+        }
+        @keyframes blink-animation { to { visibility: hidden; } }
+        .counter-title { color: #64748b; font-size: 13px; letter-spacing: 3px; margin-bottom: 12px; font-weight: 700; text-shadow: 0 0 5px rgba(100,116,139,0.3); }
         
-        @keyframes border-sparkle {
-            0% { background-position: 0% 50%; box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
-            50% { background-position: 100% 50%; box-shadow: 0 0 40px rgba(251, 191, 36, 0.6); }
-            100% { background-position: 0% 50%; box-shadow: 0 0 20px rgba(251, 191, 36, 0.4); }
+        /* 카운터 펄스 애니메이션 */
+        @keyframes counter-glow-pulse {
+            0% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+            50% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.7); }
+            100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
         }
+        .live-text { font-size: 14px; margin-right: 8px; animation: blink-animation 1s steps(2, start) infinite; vertical-align: middle; }
 
-        /* [움직이는 반짝이 입자 효과] */
-        .form-wrap::after {
-            content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
-            background: radial-gradient(circle at 10% 10%, rgba(251, 191, 36, 0.3) 1px, transparent 1px),
-                        radial-gradient(circle at 90% 90%, rgba(251, 191, 36, 0.3) 1px, transparent 1px),
-                        radial-gradient(circle at 50% 10%, rgba(251, 191, 36, 0.3) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: sparkle-drift 4s infinite alternate;
-            opacity: 0.6; pointer-events: none;
-        }
-        @keyframes sparkle drift {
-            0% { transform: translateY(0) scale(1); }
-            100% { transform: translateY(-15px) scale(1.1); }
-        }
-
-        .form-wrap iframe {
-            width: 100%; height: 950px; border-radius: 15px; border: none; background: #fff; display: block;
-        }
-
-        /* [최하단 카운터] */
-        .footer-counter { padding: 60px 0 80px; text-align: center; position: relative; z-index: 10; }
-        .counter-box {
-            display: inline-block; padding: 10px 25px; border: 2px solid #fbbf24; 
-            background: #000; border-radius: 5px; box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
-        }
-    }
+        .footer { text-align: center; font-size: 11px; color: #475569; padding: 50px 0; }
     </style>
 </head>
 <body>
 
+<div class="neon-lines"></div>
+
 <header>
     <div class="logo-wrapper">
-        <div class="brand-logo">
-            <span class="logo-text">FOCUS</span>
-            <div class="logo-symbol"></div>
-        </div>
+        <div class="brand-logo"><span class="logo-text">FOCUS</span><div class="logo-symbol"></div></div>
     </div>
-    <h1>손실 없는 투자 원칙<br><span class="gold-txt">VIP (포커스)</span></h1>
+    <span style="color: #fbbf24; font-weight: 700; font-size: 14px; letter-spacing: 4px; margin-bottom: 15px; display: block; text-shadow: 0 0 5px rgba(251,191,36,0.5);">PREMIUM INVESTMENT PRINCIPLE</span>
+    <h1>손실 없는 투자 원칙<br><span class="gold">VIP (포커스)</span></h1>
 </header>
 
 <div class="container">
-    <div class="benefit-row">
-        <div class="benefit-item"><span>초기 매입금 지원</span><b>20% 즉시지급</b></div>
-        <div style="width:1px; background:rgba(251,191,36,0.3);"></div>
-        <div class="benefit-item"><span>해외선물 수수료</span><b>$2.0 최저가</b></div>
+    <div class="benefit-box">
+        <div style="display: flex; justify-content: space-around; align-items: center;">
+            <div><span style="font-size: 13px;">초기 매입금 지원</span><span class="benefit-val">20% 즉시지급</span></div>
+            <div style="width: 1px; height: 50px; background: rgba(251,191,36,0.3);"></div>
+            <div><span style="font-size: 13px;">해외선물 수수료</span><span class="benefit-val">$2.0 최저가</span></div>
+        </div>
     </div>
 
-    <div class="info-card">
-        <div class="point" style="margin-bottom:12px;">상방/하방 구애받지 않는 양방향 타점 공유</div>
-        <div class="point" style="margin-bottom:12px;">해외선물 리스크 헷지 시스템 가동</div>
-        <div class="point" style="margin-bottom:12px;">검증된 포커스만의 독보적 시장 분석 노하우</div>
-        <div class="point" style="margin-bottom:12px;">초보자도 수익 낼 수 있는 1:1 맞춤형 무료 교육</div>
-        <div class="point">전담 전문가 배정 및 실시간 리딩 서비스</div>
+    <div class="promo-box">
+        <span style="font-size: 21px; font-weight: 900; color: #fff; display: block; margin-bottom: 14px;">[변동성 시장의 해답, 해외 선물]</span>
+        <span style="color: #cbd5e1; font-size: 17px; line-height: 1.6;">복잡한 시장 분석은 전문가에게 맡기시고,<br>당신은 수익에 집중하세요!</span>
     </div>
 
-    <div class="form-section">
-        <strong style="font-size: 22px; color: #fff; margin-bottom: 20px; display: block;">▼ 실시간 VIP 컨설팅 신청 ▼</strong>
-        
+    <div class="content-section">
+        <div class="point-item"><span>✔</span> 상방/하방 구애받지 않는 '양방향' 타점 실시간 공유</div>
+        <div class="point-item"><span>✔</span> 해외선물 수익 극대화를 위한 체계적 리스크 헷지</div>
+        <div class="point-item"><span>✔</span> 수년간 검증된 포커스만의 독보적인 시장 분석 노하우</div>
+        <div class="point-item"><span>✔</span> 실시간 시장 이슈 브리핑 및 대응 전략 제시</div>
+        <div class="point-item"><span>✔</span> 1:1 맞춤형 무료 교육 서비스</div>
+    </div>
+
+    <div style="text-align: center;">
+        <p style="color: #fbbf24; margin-bottom: 25px; font-weight: 900; font-size: 20px; text-shadow: 0 0 15px rgba(251,191,36,0.6);">▼ 실시간 VIP 상담 신청 ▼</p>
         <div class="form-wrap">
-            <iframe src="https://naver.me/50BAV2eP" frameborder="0">로드 중...</iframe>
+            <iframe src="https://tally.so/embed/2EkdBM?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
         </div>
-        <p style="color: #94a3b8; font-size: 13px; margin-top: 20px;">정보 입력 즉시 전문가가 연락드립니다.</p>
     </div>
 
-    <div class="footer-counter">
-        <p style="color: #64748b; font-size: 12px; margin-bottom: 12px; letter-spacing: 2px;">REAL-TIME TRAFFIC</p>
-        <div class="counter-box">
-            <span style="color: #fbbf24; font-size: 20px; font-weight: bold; letter-spacing: 2px;">
-                <span style="font-size: 14px; margin-right: 8px; vertical-align: middle; animation: blink 1s infinite;">● LIVE</span> 
-                <span id="visit-number">1,053</span>
-            </span>
-        </div>
+    <div class="counter-section">
+        <p class="counter-title">TOTAL VISITORS</p>
+        <div class="counter-badge"><span class="live-text">● LIVE</span> <span id="visit-number">1,053</span></div>
     </div>
+
+    <div class="footer">ⓒ VIP FOCUS PRINCIPLE. All Rights Reserved.</div>
 </div>
 
 <script>
@@ -164,6 +176,5 @@
     updateCounter();
 </script>
 
-@keyframes blink { 50% { opacity: 0; } }
 </body>
 </html>
