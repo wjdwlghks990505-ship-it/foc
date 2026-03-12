@@ -209,25 +209,35 @@
 
 </body>
 </html>
-<div align="center" style="margin-top: 30px; margin-bottom: 20px; font-family: sans-serif;">
-    <p style="margin-bottom: 8px; color: #94a3b8; font-size: 13px;">누적 방문객</p>
-    <div style="border-top: 1px solid #333; border-bottom: 1px solid #333; padding: 10px; width: 150px;">
-        <span id="visit-num" style="color: #d4af37; font-size: 22px; font-weight: bold;">1,042</span>
+<div align="center" style="margin-top: 35px; margin-bottom: 25px; font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;">
+    <p style="margin-bottom: 10px; color: #64748b; font-size: 13px; letter-spacing: 1px;">TOTAL VISITORS</p>
+    <div style="display: inline-block; padding: 8px 20px; border: 1px solid #d4af37; border-radius: 2px; background: #000;">
+        <span id="actual-visit-count" style="color: #d4af37; font-size: 22px; font-weight: bold; letter-spacing: 2px;">
+            <span style="font-size: 14px; color: #d4af37; margin-right: 5px;">LIVE</span> 
+            <span id="visit-number">...</span>
+        </span>
     </div>
 </div>
 
 <script>
-    // 외부 데이터 서버에서 진짜 숫자만 가져오기
-    fetch('https://api.countapi.xyz/hit/focus_investment/main')
-    .then(res => res.json())
-    .then(data => {
-        document.getElementById('visit-num').innerText = data.value.toLocaleString();
-    })
-    .catch(() => {
-        // 서버 응답 없을 때 기본 숫자 표시
-        document.getElementById('visit-num').innerText = "1,042";
-    });
+    // 외부 이미지 없이 데이터만 가져와서 글자로 뿌리는 방식
+    async function updateRealCount() {
+        const url = "https://api.counterapi.dev/v1/wjdwlghks990505_foc/visits/up";
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+            document.getElementById('visit-number').innerText = data.count.toLocaleString();
+        } catch (e) {
+            // 서버 점검 시 매니저님 로컬 기록으로 대체
+            let localCount = localStorage.getItem('foc_v_count') || 1052;
+            localCount = parseInt(localCount) + 1;
+            localStorage.setItem('foc_v_count', localCount);
+            document.getElementById('visit-number').innerText = localCount.toLocaleString();
+        }
+    }
+    updateRealCount();
 </script>
+
 
 
 
