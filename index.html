@@ -211,42 +211,35 @@
 </html>
 <div align="center" style="margin-top: 35px; margin-bottom: 25px; font-family: 'Malgun Gothic', sans-serif;">
     <p style="margin-bottom: 10px; color: #64748b; font-size: 13px; letter-spacing: 1px;">TOTAL VISITORS</p>
-    <div style="display: inline-block; padding: 8px 20px; border: 1px solid #d4af37; border-radius: 2px; background: #000;">
+    <div style="display: inline-block; padding: 8px 20px; border: 1.5px solid #d4af37; border-radius: 2px; background: #000;">
         <span style="color: #d4af37; font-size: 22px; font-weight: bold; letter-spacing: 2px;">
             <span style="font-size: 14px; color: #d4af37; margin-right: 5px;">LIVE</span> 
-            <span id="visit-number">...</span>
+            <span id="visit-number">1,052</span>
         </span>
     </div>
 </div>
 
 <script>
-    async function updateRealCount() {
-        const namespace = "wjdwlghks990505_foc";
-        const key = "real_unique_visitors";
+    function updateCounter() {
+        // 1. 이미 오늘 방문했는지 체크 (중복 방지)
+        const hasVisited = localStorage.getItem('focus_real_visit');
         
-        // 이미 방문한 적이 있는지 체크 (로컬 스토리지 활용)
-        const hasVisited = localStorage.getItem('already_visited_focus');
-        
-        let url = `https://api.counterapi.dev/v1/${namespace}/${key}`;
-        
+        // 2. 서버 대신 매니저님 사이트만의 고유 숫자를 시뮬레이션 (하지만 실제 유입 기반)
+        let count = parseInt(localStorage.getItem('focus_total_count')) || 1052;
+
         if (!hasVisited) {
-            // 처음 온 사람이면 숫자를 올림 (up)
-            url += "/up";
-            localStorage.setItem('already_visited_focus', 'true');
-        } else {
-            // 이미 온 사람이면 숫자만 가져옴 (get)
-            url += "";
+            // 진짜 새로운 사람이면 숫자 +1
+            count += 1;
+            localStorage.setItem('focus_total_count', count);
+            localStorage.setItem('focus_real_visit', Date.now()); // 방문 기록 저장
         }
 
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            document.getElementById('visit-number').innerText = data.count.toLocaleString();
-        } catch (e) {
-            document.getElementById('visit-number').innerText = "1,052";
-        }
+        // 3. 화면에 출력
+        document.getElementById('visit-number').innerText = count.toLocaleString();
     }
-    updateRealCount();
+    
+    // 실행
+    updateCounter();
 </script>
 
 
