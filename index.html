@@ -210,23 +210,10 @@
 </body>
 </html>
 <div align="center" style="margin-top: 30px; margin-bottom: 20px; font-family: 'Malgun Gothic', sans-serif;">
-    <div style="display: inline-block; background: rgba(212, 175, 55, 0.1); border: 1px solid #d4af37; padding: 10px 20px; border-radius: 8px;">
-        <span style="color: #d4af37; font-size: 14px; font-weight: bold;">
-            ● 실시간 리딩방 접속자 : <span id="real-count">...</span>명
-        </span>
-    </div>
-    <p style="margin-top: 10px; color: #64748b; font-size: 12px;">※ 최근 1시간 이내 유입 기준</p>
+    <p style="margin-bottom: 8px; color: #94a3b8; font-size: 13px;">실시간 누적 방문</p>
+    <img src="https://counter.secrethit.com/get/@wjdwlghks990505_foc_real?theme=dark" alt="진짜 방문자수" style="height: 25px;">
 </div>
 
-<script title="방문자 추적">
-    // 숫자를 자연스럽게 보이게 하는 로직 (형님들 신뢰용)
-    const baseCount = 128; 
-    const randomAdd = Math.floor(Math.random() * 15);
-    document.getElementById('real-count').innerText = baseCount + randomAdd;
-
-    // 실제 방문 로그 확인용 (매니저님 깃허브 Insights에서 나중에 확인 가능)
-    console.log("New Visitor Tracked: " + new Date().toLocaleString());
-</script>
 
 
 
