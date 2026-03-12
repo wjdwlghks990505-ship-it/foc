@@ -209,10 +209,10 @@
 
 </body>
 </html>
-<div align="center" style="margin-top: 35px; margin-bottom: 25px; font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;">
+<div align="center" style="margin-top: 35px; margin-bottom: 25px; font-family: 'Malgun Gothic', sans-serif;">
     <p style="margin-bottom: 10px; color: #64748b; font-size: 13px; letter-spacing: 1px;">TOTAL VISITORS</p>
     <div style="display: inline-block; padding: 8px 20px; border: 1px solid #d4af37; border-radius: 2px; background: #000;">
-        <span id="actual-visit-count" style="color: #d4af37; font-size: 22px; font-weight: bold; letter-spacing: 2px;">
+        <span style="color: #d4af37; font-size: 22px; font-weight: bold; letter-spacing: 2px;">
             <span style="font-size: 14px; color: #d4af37; margin-right: 5px;">LIVE</span> 
             <span id="visit-number">...</span>
         </span>
@@ -220,23 +220,35 @@
 </div>
 
 <script>
-    // 외부 이미지 없이 데이터만 가져와서 글자로 뿌리는 방식
     async function updateRealCount() {
-        const url = "https://api.counterapi.dev/v1/wjdwlghks990505_foc/visits/up";
+        const namespace = "wjdwlghks990505_foc";
+        const key = "real_unique_visitors";
+        
+        // 이미 방문한 적이 있는지 체크 (로컬 스토리지 활용)
+        const hasVisited = localStorage.getItem('already_visited_focus');
+        
+        let url = `https://api.counterapi.dev/v1/${namespace}/${key}`;
+        
+        if (!hasVisited) {
+            // 처음 온 사람이면 숫자를 올림 (up)
+            url += "/up";
+            localStorage.setItem('already_visited_focus', 'true');
+        } else {
+            // 이미 온 사람이면 숫자만 가져옴 (get)
+            url += "";
+        }
+
         try {
             const response = await fetch(url);
             const data = await response.json();
             document.getElementById('visit-number').innerText = data.count.toLocaleString();
         } catch (e) {
-            // 서버 점검 시 매니저님 로컬 기록으로 대체
-            let localCount = localStorage.getItem('foc_v_count') || 1052;
-            localCount = parseInt(localCount) + 1;
-            localStorage.setItem('foc_v_count', localCount);
-            document.getElementById('visit-number').innerText = localCount.toLocaleString();
+            document.getElementById('visit-number').innerText = "1,052";
         }
     }
     updateRealCount();
 </script>
+
 
 
 
