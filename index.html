@@ -7,13 +7,28 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Montserrat:wght@900&family=JetBrains+Mono:wght@700&display=swap');
         
-        /* [배경: 미드나잇 네이비 블랙 적용] */
+        /* [배경: 미드나잇 네이비 블랙] */
         body { 
             font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; 
-            background: #00020a; color: #f8fafc; overflow-x: hidden; word-break: keep-all; position: relative;
+            background: #00020a; color: #f8fafc; overflow-x: hidden; word-break: keep-all; 
+            position: relative; min-height: 100vh;
         }
 
-        /* 배경 효과 */
+        /* [★ 핵심: 전체 화면 골드 반짝이 테두리 ★] */
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #fbbf24, #fff, #d4af37, #fbbf24, #fff);
+            border-image-slice: 1;
+            z-index: 9999; pointer-events: none; /* 클릭 방해 금지 */
+            animation: border-glow 3s linear infinite;
+        }
+        @keyframes border-glow {
+            0%, 100% { filter: brightness(1) drop-shadow(0 0 5px #fbbf24); }
+            50% { filter: brightness(1.5) drop-shadow(0 0 20px #fbbf24); }
+        }
+
+        /* 배경 입자 효과 */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px), radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
@@ -29,7 +44,7 @@
         }
         @keyframes diamondMove { 0% { transform: translate(0, 0) rotateX(20deg); } 100% { transform: translate(60px, 60px) rotateX(20deg); } }
 
-        /* [로고: 다이아몬드 안 원형 복구] */
+        /* 로고 영역 */
         .logo-wrapper { padding: 80px 0 20px; text-align: center; position: relative; z-index: 10; }
         .brand-logo { display: inline-flex; align-items: center; justify-content: center; animation: logo-glow-pulse 4s infinite ease-in-out; }
         .logo-text { font-size: 42px; letter-spacing: 0.15em; color: #fff; text-shadow: 0 0 10px #fff; font-weight: 900; margin-right: 15px; }
@@ -44,7 +59,6 @@
             background: #fbbf24; border-radius: 50%; box-shadow: 0 0 8px #fbbf24;
         }
         @keyframes symbol-rotate { 0% { transform: rotate(45deg); } 80%, 100% { transform: rotate(405deg); } }
-        @keyframes logo-glow-pulse { 0%, 100% { filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.3)); } 50% { filter: drop-shadow(0 0 25px rgba(251, 191, 36, 0.9)); } }
 
         header { text-align: center; padding: 10px 20px 100px; position: relative; z-index: 10; }
         h1 { font-size: 36px; font-weight: 900; line-height: 1.3; color: #fff; }
@@ -52,7 +66,7 @@
         
         .container { max-width: 500px; margin: -70px auto 30px; position: relative; z-index: 10; padding: 0 20px; }
 
-        /* [혜택 박스: 리얼 골드 배경 + 딥 레드 숫자 강조] */
+        /* 혜택 박스 */
         .benefit-box { 
             background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24); 
             padding: 30px 15px; border-radius: 24px; text-align: center; 
@@ -61,59 +75,43 @@
         }
         .benefit-label { font-size: 13px; font-weight: 700; color: #1a1a1a; display: block; margin-bottom: 8px; }
         .benefit-val { 
-            font-size: 28px; font-weight: 900; 
-            color: #b91c1c; /* 딥 레드 강조 */
-            display: block;
-            text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
+            font-size: 28px; font-weight: 900; color: #b91c1c; 
+            display: block; text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
         }
 
-        /* [홍보 문구: 골드 톤 변경 및 펄스 효과] */
+        /* 홍보 문구 */
         .promo-box { 
             background: rgba(7, 10, 20, 0.8); padding: 30px 25px; border-radius: 24px; text-align: center; 
             border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 30px; 
             animation: promo-glow-pulse 3s infinite ease-in-out;
         }
-        @keyframes promo-glow-pulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.2); }
-            50% { box-shadow: 0 0 25px rgba(251, 191, 36, 0.6); }
-        }
-        .promo-main { 
-            font-size: 21px; font-weight: 900; color: #fbbf24; 
-            text-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
-            display: block; margin-bottom: 14px; 
-        }
+        .promo-main { font-size: 21px; font-weight: 900; color: #fbbf24; text-shadow: 0 0 10px #fbbf24; display: block; margin-bottom: 14px; }
 
-        /* [체크리스트: 다이아몬드 골드 아이콘 적용] */
+        /* 체크리스트 */
         .content-section { background: rgba(255, 255, 255, 0.02); padding: 35px 25px; border-radius: 24px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.05); }
         .point-item { display: flex; align-items: flex-start; margin-bottom: 22px; font-size: 16px; color: #e2e8f0; }
         .point-icon {
             width: 14px; height: 14px; border: 2.5px solid #fbbf24; border-radius: 3px;
             transform: rotate(45deg); box-shadow: 0 0 8px #fbbf24;
-            display: inline-block; margin-right: 18px; margin-top: 5px;
-            animation: symbol-rotate 4s infinite;
-            position: relative;
+            display: inline-block; margin-right: 18px; margin-top: 5px; animation: symbol-rotate 4s infinite; position: relative;
         }
         .point-icon::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 4.5px; height: 4.5px; background: #fbbf24; border-radius: 50%; }
 
-        /* 폼 영역 */
+        /* 신청 폼 */
         .form-wrap { position: relative; padding: 8px; border-radius: 25px; background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24); animation: form-glow 2s infinite ease-in-out; }
         @keyframes form-glow { 0%, 100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); } 50% { box-shadow: 0 0 50px rgba(251, 191, 36, 0.8); } }
         iframe { width: 100%; height: 500px; border-radius: 20px; border: none; background: #000; display: block; }
 
-        /* [하단 시계: KST 문구 포함] */
-        .clock-section { margin-top: 50px; text-align: center; padding-bottom: 20px; }
-        .clock-label { 
-            color: #fbbf24; font-size: 11px; letter-spacing: 3px; margin-bottom: 8px; 
-            display: block; font-weight: 700; text-shadow: 0 0 5px rgba(251, 191, 36, 0.4);
-        }
+        /* 하단 시계 */
+        .clock-section { margin-top: 50px; text-align: center; padding-bottom: 40px; }
+        .clock-label { color: #fbbf24; font-size: 11px; letter-spacing: 3px; margin-bottom: 8px; display: block; font-weight: 700; }
         .clock-badge { 
             display: inline-block; padding: 10px 25px; border: 1.5px solid rgba(251, 191, 36, 0.5); 
             border-radius: 10px; background: rgba(0, 0, 0, 0.6); color: #fbbf24; 
             font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: bold; 
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.3);
         }
 
-        .footer { text-align: center; font-size: 11px; color: #475569; padding: 30px 0; }
+        .footer { text-align: center; font-size: 11px; color: #475569; padding: 20px 0; }
     </style>
 </head>
 <body>
@@ -131,21 +129,15 @@
 <div class="container">
     <div class="benefit-box">
         <div style="display: flex; justify-content: space-around; align-items: center;">
-            <div>
-                <span class="benefit-label">초기 매입금 지원</span>
-                <span class="benefit-val">20% 즉시지급</span>
-            </div>
+            <div><span class="benefit-label">초기 매입금 지원</span><span class="benefit-val">20% 즉시지급</span></div>
             <div style="width: 1px; height: 50px; background: rgba(0,0,0,0.1);"></div>
-            <div>
-                <span class="benefit-label">해외선물 수수료</span>
-                <span class="benefit-val">$2.0 최저가</span>
-            </div>
+            <div><span class="benefit-label">해외선물 수수료</span><span class="benefit-val">$2.0 최저가</span></div>
         </div>
     </div>
 
     <div class="promo-box">
         <span class="promo-main">[변동성 시장의 해답, 해외 선물]</span>
-        <span style="color: #cbd5e1; font-size: 17px; line-height: 1.6;">복잡한 시장 분석은 전문가에게 맡기시고,<br>당신은 수익에 집중하세요!</span>
+        <span style="color: #cbd5e1; font-size: 17px; line-height: 1.6;">복합한 시장 분석은 전문가에게 맡기시고,<br>당신은 수익에 집중하세요!</span>
     </div>
 
     <div class="content-section">
