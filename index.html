@@ -5,17 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>손실 없는 투자 원칙 VIP (포커스)</title>
     <style>
-        /* [폰트 설정] */
+        /* [폰트 및 전체 배경] */
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Montserrat:wght@900&display=swap');
         
-        /* [전체 배경] 딥블루 & 블랙 그라데이션 */
         body { 
             font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; 
-            background: #00020a; /* 더 깊은 블랙 */
-            color: #f8fafc; overflow-x: hidden; word-break: keep-all; position: relative;
+            background: #00020a; color: #f8fafc; overflow-x: hidden; word-break: keep-all; position: relative;
         }
 
-        /* [움직이는 배경 애니메이션 - Canvas 대체용 CSS] */
+        /* [움직이는 배경 애니메이션] */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: 
@@ -23,142 +21,78 @@
                 radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
                 radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
             background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
             animation: backgroundStarMove 60s linear infinite;
             opacity: 0.3; z-index: 0;
         }
-        
         @keyframes backgroundStarMove {
             from { background-position: 0 0, 40px 60px, 130px 270px; }
             to { background-position: -1000px 500px, -600px 200px, -400px -300px; }
         }
 
-        /* [다이아몬드 라인 애니메이션 배경] */
+        /* [네온 다이아몬드 라인 배경] */
         .neon-lines {
             position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
-            /* 다이아몬드 패턴 구현: 45도 회전된 선들을 교차시킴 */
             background-image: 
                 linear-gradient(45deg, rgba(251, 191, 36, 0.07) 1px, transparent 1px),
                 linear-gradient(-45deg, rgba(251, 191, 36, 0.07) 1px, transparent 1px);
-            background-size: 60px 60px; /* 다이아몬드 크기 조절 */
-            background-position: center center;
-            z-index: 1;
-            /* 배경 자체가 움직이는 애니메이션 */
-            animation: diamondMove 20s linear infinite;
-            perspective: 1000px;
-            transform-style: preserve-3d;
+            background-size: 60px 60px; z-index: 1;
+            animation: diamondMove 20s linear infinite; perspective: 1000px; transform-style: preserve-3d;
         }
-        
-        /* 다이아몬드 패턴이 대각선으로 부드럽게 흐르는 애니메이션 */
         @keyframes diamondMove {
             0% { transform: translate(0, 0) rotateX(20deg); }
-            100% { transform: translate(60px, 60px) rotateX(20deg); } /* background-size와 맞춰야 끊김이 없음 */
+            100% { transform: translate(60px, 60px) rotateX(20deg); }
         }
 
-        /* [중앙 골드 아우라 - 더 세련되게] */
         .glow-aura {
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80vw; height: 80vw;
             background: radial-gradient(circle, rgba(251, 191, 36, 0.18) 0%, rgba(0,2,10,0) 70%); z-index: 2; pointer-events: none;
             animation: aura-pulse 6s ease-in-out infinite alternate;
         }
-        @keyframes aura-pulse { from { opacity: 0.5; transform: translate(-50%, -50%) scale(1); } to { opacity: 1; transform: translate(-50%, -50%) scale(1.1); } }
+        @keyframes aura-pulse { from { opacity: 0.5; } to { opacity: 1; } }
 
-        /* [새로운 FOCUS 로고 디자인] */
+        /* [움직이는 FOCUS 로고] */
         .logo-wrapper { padding: 60px 0 20px; text-align: center; position: relative; z-index: 10; }
-        
-        .brand-logo {
-            display: inline-flex; align-items: center; justify-content: center;
-            font-family: 'Montserrat', sans-serif; font-weight: 900;
-            perspective: 1000px;
-        }
-        
-        /* F O C U S 텍스트 */
-        .logo-text {
-            font-size: 42px; letter-spacing: 0.15em; color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(251, 191, 36, 0.5);
-            margin-right: 12px; position: relative;
-        }
-        
-        /* 심볼 (조준경/그래프 느낌) */
+        .brand-logo { display: inline-flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; }
+        .logo-text { font-size: 42px; letter-spacing: 0.15em; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(251, 191, 36, 0.5); margin-right: 12px; }
         .logo-symbol {
             width: 38px; height: 38px; border: 4px solid #fbbf24; border-radius: 8px;
-            position: relative; transform: rotate(45deg);
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
+            position: relative; transform: rotate(45deg); box-shadow: 0 0 15px rgba(251, 191, 36, 0.8);
             animation: symbol-rotate 4s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
         }
-        .logo-symbol::after {
-            content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 12px; height: 12px; background: #fbbf24; border-radius: 50%;
-            box-shadow: 0 0 10px #fbbf24;
-        }
+        .logo-symbol::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background: #fbbf24; border-radius: 50%; box-shadow: 0 0 10px #fbbf24; }
+        @keyframes symbol-rotate { 0% { transform: rotate(45deg); } 100% { transform: rotate(405deg); } }
 
-        @keyframes symbol-rotate {
-            0% { transform: rotate(45deg) scale(1); }
-            80% { transform: rotate(405deg) scale(1); }
-            90% { transform: rotate(405deg) scale(1.1); }
-            100% { transform: rotate(405deg) scale(1); }
-        }
-
-        /* 헤더 스타일 유지 */
-        header { background: transparent; text-align: center; padding: 10px 20px 100px; position: relative; z-index: 10; }
-        .tagline { color: #fbbf24; font-weight: 700; font-size: 14px; letter-spacing: 4px; margin-bottom: 15px; display: block; opacity: 0.9; }
-        h1 { font-size: 36px; font-weight: 900; line-height: 1.3; margin: 0; letter-spacing: -1.5px; text-shadow: 0 2px 15px rgba(0,0,0,0.7); color: #fff; }
+        /* [텍스트 스타일] */
+        header { text-align: center; padding: 10px 20px 100px; position: relative; z-index: 10; }
+        .tagline { color: #fbbf24; font-weight: 700; font-size: 14px; letter-spacing: 4px; margin-bottom: 15px; display: block; }
+        h1 { font-size: 36px; font-weight: 900; line-height: 1.3; margin: 0; color: #fff; }
         .gold { color: #fbbf24; text-shadow: 0 0 15px rgba(251, 191, 36, 0.5); }
         
-        /* 메인 컨텐츠 영역 */
         .container { max-width: 500px; margin: -70px auto 60px; position: relative; z-index: 10; padding: 0 20px; }
         
-        /* [하이라이트 박스 - 네온 글래스모피즘] */
+        /* [지원금 & 수수료 박스] */
         .benefit-box { 
-            background: rgba(251, 191, 36, 0.05);
-            color: #fff; padding: 30px 15px; border-radius: 24px; text-align: center; 
-            border: 2px solid #fbbf24;
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.3), inset 0 0 15px rgba(251, 191, 36, 0.1);
-            margin-bottom: 30px; backdrop-filter: blur(10px);
+            background: rgba(251, 191, 36, 0.05); padding: 30px 15px; border-radius: 24px; text-align: center; 
+            border: 2px solid #fbbf24; box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); margin-bottom: 30px; backdrop-filter: blur(10px);
         }
         .benefit-row { display: flex; justify-content: space-around; align-items: center; }
-        .benefit-val { font-size: 28px; font-weight: 900; display: block; color: #fbbf24; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
-        .benefit-txt { font-size: 14px; font-weight: 700; display: block; margin-bottom: 5px; opacity: 0.9; }
+        .benefit-val { font-size: 26px; font-weight: 900; color: #fbbf24; text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+        .benefit-txt { font-size: 14px; font-weight: 700; opacity: 0.9; margin-bottom: 5px; display: block; }
 
-        /* [홍보 문구 - 다크 모던] */
-        .promo-box { 
-            background: rgba(7, 10, 20, 0.8); padding: 30px 25px; border-radius: 24px; text-align: center; 
-            border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 30px; backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .promo-main { font-size: 21px; font-weight: 900; color: #fff; display: block; margin-bottom: 14px; letter-spacing: -0.5px; }
-        .promo-sub { font-size: 17px; color: #cbd5e1; font-weight: 500; line-height: 1.6; }
+        /* [홍보 및 체크리스트] */
+        .promo-box { background: rgba(7, 10, 20, 0.8); padding: 25px; border-radius: 24px; text-align: center; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 30px; }
+        .content-section { background: rgba(255, 255, 255, 0.02); padding: 30px 20px; border-radius: 24px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.05); }
+        .point-item { display: flex; align-items: flex-start; margin-bottom: 15px; font-size: 15px; color: #e2e8f0; }
+        .point-item span { color: #fbbf24; margin-right: 12px; }
 
-        /* [체크리스트 - 리스트 스타일 강화] */
-        .content-section { 
-            background: rgba(255, 255, 255, 0.02); padding: 35px 25px; border-radius: 24px; 
-            margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.05); 
-        }
-        .point-item { display: flex; align-items: flex-start; margin-bottom: 22px; font-size: 16px; font-weight: 400; color: #e2e8f0; line-height: 1.5; }
-        .point-item:last-child { margin-bottom: 0; }
-        .point-item span { color: #fbbf24; margin-right: 15px; font-size: 18px; position: relative; top: 2px; }
-
-        /* [신청 버튼 - 플로팅 애니메이션 추가] */
-        .btn-wrapper { text-align: center; position: relative; z-index: 10; }
-        .btn-submit { 
-            display: inline-block; width: 100%; box-sizing: border-box;
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-            color: #000; border: none;
-            padding: 24px; border-radius: 18px; font-size: 24px; font-weight: 900; 
-            text-decoration: none; text-align: center; cursor: pointer;
-            box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
-            transition: all 0.3s ease;
-            animation: btn-float 3s ease-in-out infinite;
-        }
-        .btn-submit:hover { box-shadow: 0 15px 45px rgba(251, 191, 36, 0.6); transform: translateY(-3px); }
-        .btn-submit:active { transform: translateY(1px) scale(0.98); }
-        
-        @keyframes btn-float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+        /* [네이버 폼 & 카운터 통합] */
+        .form-section { margin-top: 50px; text-align: center; }
+        .form-container { 
+            width: 100%; max-width: 500px; background: #fff; border-radius: 20px; padding: 5px; box-sizing: border-box; 
+            box-shadow: 0 0 40px rgba(251, 191, 36, 0.2); overflow: hidden; margin-top: 20px;
         }
         
-        .footer { text-align: center; font-size: 12px; color: #475569; margin-top: 60px; padding-bottom: 50px; position: relative; z-index: 10; }
+        .footer { text-align: center; font-size: 12px; color: #475569; margin-top: 60px; padding-bottom: 50px; }
     </style>
 </head>
 <body>
@@ -187,8 +121,8 @@
     </div>
 
     <div class="promo-box">
-        <span class="promo-main">[변동성 시장의 해답, 해외 선물]</span>
-        <span class="promo-sub">복잡한 시장 분석은 전문가에게 맡기시고,<br>당신은 수익에 집중하세요!</span>
+        <strong style="color: #fff; font-size: 19px;">[변동성 시장의 해답, 해외 선물]</strong><br>
+        <p style="color: #cbd5e1; margin-top: 10px;">복잡한 시장 분석은 전문가에게 맡기시고,<br>당신은 수익에 집중하세요!</p>
     </div>
 
     <div class="content-section">
@@ -199,55 +133,55 @@
         <div class="point-item"><span>✔</span> 초보자도 수익 낼 수 있는 1:1 맞춤형 무료 교육 서비스</div>
     </div>
 
-    <div class="btn-wrapper">
-        <a href="https://naver.me/50BAV2eP" class="btn-submit">무료 체험 신청하기</a>
-        <p style="color: #94a3b8; margin-top: 25px; font-size: 15px; font-weight: 500;">성공 투자의 파트너, 포커스와 함께하세요.</p>
+    <div class="form-section">
+        <div style="margin-bottom: 30px;">
+            <p style="margin-bottom: 10px; color: #64748b; font-size: 13px; letter-spacing: 1px;">TOTAL VISITORS</p>
+            <div style="display: inline-block; padding: 8px 20px; border: 1.5px solid #d4af37; border-radius: 2px; background: #000;">
+                <span style="color: #d4af37; font-size: 22px; font-weight: bold; letter-spacing: 2px;">
+                    <span style="font-size: 14px; margin-right: 5px; color: #d4af37;">● LIVE</span> 
+                    <span id="visit-number">1,052</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="brand-logo" style="transform: scale(0.65); margin-bottom: 10px;">
+            <span class="logo-text" style="color: #fbbf24;">FOCUS</span>
+            <div class="logo-symbol"></div>
+        </div>
+        <h2 style="color: #fff; font-size: 20px; font-weight: 900; margin: 0 0 20px;">VIP 무료 체험 신청서</h2>
+
+        <div class="form-container">
+            <iframe 
+                src="https://form.naver.com/me/50BAV2eP/fill" 
+                width="100%" 
+                height="850" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0"
+                style="display: block;">
+                로드 중...
+            </iframe>
+        </div>
+        <p style="color: #94a3b8; margin-top: 20px; font-size: 14px;">* 성함과 번호를 남겨주시면 순차적으로 연락드립니다.</p>
     </div>
 
     <div class="footer">ⓒ VIP FOCUS PRINCIPLE. All Rights Reserved.</div>
 </div>
 
-</body>
-</html>
-<div align="center" style="margin-top: 35px; margin-bottom: 25px; font-family: 'Malgun Gothic', sans-serif;">
-    <p style="margin-bottom: 10px; color: #64748b; font-size: 13px; letter-spacing: 1px;">TOTAL VISITORS</p>
-    <div style="display: inline-block; padding: 8px 20px; border: 1.5px solid #d4af37; border-radius: 2px; background: #000;">
-        <span style="color: #d4af37; font-size: 22px; font-weight: bold; letter-spacing: 2px;">
-            <span style="font-size: 14px; color: #d4af37; margin-right: 5px;">LIVE</span> 
-            <span id="visit-number">1,052</span>
-        </span>
-    </div>
-</div>
-
 <script>
+    // 실제 유입 카운터 (중복 방지)
     function updateCounter() {
-        // 1. 이미 오늘 방문했는지 체크 (중복 방지)
         const hasVisited = localStorage.getItem('focus_real_visit');
-        
-        // 2. 서버 대신 매니저님 사이트만의 고유 숫자를 시뮬레이션 (하지만 실제 유입 기반)
         let count = parseInt(localStorage.getItem('focus_total_count')) || 1052;
-
         if (!hasVisited) {
-            // 진짜 새로운 사람이면 숫자 +1
             count += 1;
             localStorage.setItem('focus_total_count', count);
-            localStorage.setItem('focus_real_visit', Date.now()); // 방문 기록 저장
+            localStorage.setItem('focus_real_visit', Date.now());
         }
-
-        // 3. 화면에 출력
         document.getElementById('visit-number').innerText = count.toLocaleString();
     }
-    
-    // 실행
     updateCounter();
 </script>
 
-
-
-
-
-
-
-
-
-
+</body>
+</html>
