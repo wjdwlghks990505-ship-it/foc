@@ -27,31 +27,26 @@
         .gold { color: #fbbf24; }
         .container { max-width: 500px; margin: -50px auto 0; position: relative; z-index: 10; padding: 0 20px; }
         
-        /* 혜택 박스 */
         .benefit-box { 
             background: rgba(251, 191, 36, 0.05); padding: 25px 15px; border-radius: 20px; text-align: center; 
             border: 1.5px solid #fbbf24; margin-bottom: 40px; backdrop-filter: blur(10px);
         }
 
-        /* [네이버 폼 즉시 노출 섹션] */
-        .form-area {
-            background: linear-gradient(180deg, rgba(251, 191, 36, 0.1) 0%, #ffffff 10%);
-            border-radius: 30px 30px 0 0; margin: 20px -20px 0; padding: 40px 20px;
-            box-shadow: 0 -10px 30px rgba(251, 191, 36, 0.1);
+        /* [네이버 폼 구역] */
+        .form-section {
+            background: #ffffff; border-radius: 30px 30px 0 0; margin: 20px -20px 0; padding: 40px 10px 0;
+            box-shadow: 0 -10px 30px rgba(251, 191, 36, 0.2);
         }
 
-        .form-frame-container {
-            width: 100%; max-width: 500px; margin: 0 auto;
-            background: #fff; border-radius: 20px; overflow: hidden;
-            border: 4px solid #fbbf24; /* 전문가 포스 테두리 */
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            height: 900px;
+        .form-holder {
+            width: 100%; height: 900px; overflow: hidden; border-radius: 20px;
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* [카운터 하단 고정] */
+        /* [카운터 최하단] */
         .footer-counter {
-            background: #fff; text-align: center; padding: 30px 0 60px;
-            margin-left: -20px; margin-right: -20px;
+            background: #ffffff; text-align: center; padding: 40px 0 60px;
+            margin-left: -10px; margin-right: -10px; border-top: 1px solid #eee;
         }
     </style>
 </head>
@@ -64,44 +59,43 @@
             <div class="logo-symbol"></div>
         </div>
     </div>
-    <h1>손실 없는 투자 원칙<br><span class="gold">VIP 전용 컨설팅</span></h1>
+    <h1>손실 없는 투자 원칙<br><span class="gold">(VIP) 포커스</span></h1>
 </header>
 
 <div class="container">
     <div class="benefit-box">
-        <div style="display: flex; justify-content: space-around;">
+        <div style="display: flex; justify-content: space-around; align-items: center;">
             <div style="text-align: center;">
-                <span style="font-size: 13px; color: #94a3b8;">초기 매입금</span><br>
-                <b class="gold" style="font-size:19px;">20% 지원</b>
+                <span style="font-size: 12px; color: #94a3b8;">초기 매입금</span><br>
+                <b class="gold" style="font-size:18px;">20% 지원</b>
             </div>
             <div style="width: 1px; height: 30px; background: rgba(251,191,36,0.3);"></div>
             <div style="text-align: center;">
-                <span style="font-size: 13px; color: #94a3b8;">해외선물 수수료</span><br>
-                <b class="gold" style="font-size:19px;">$2.0 최저가</b>
+                <span style="font-size: 12px; color: #94a3b8;">해외선물 수수료</span><br>
+                <b class="gold" style="font-size:18px;">$2.0 최저가</b>
             </div>
         </div>
     </div>
 
-    <div class="form-area">
-        <div style="text-align: center; margin-bottom: 25px;">
-            <h2 style="font-size: 22px; color: #1e293b; font-weight: 900; margin-bottom: 5px;">실시간 상담 신청서</h2>
-            <p style="color: #64748b; font-size: 14px;">정보 입력 즉시 담당 전문가가 배정됩니다.</p>
+    <div class="form-section">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h2 style="font-size: 20px; color: #1e293b; font-weight: 900;">실시간 무료 상담 신청</h2>
         </div>
 
-        <div class="form-frame-container">
+        <div class="form-holder">
             <iframe 
-                src="https://form.office.naver.com/form/responseView.cmd?formkey=MDBiYXZlcA==" 
-                width="100%" height="100%" frameborder="0" style="display:block;">
+                src="https://naver.me/50BAV2eP" 
+                width="100%" height="100%" frameborder="0">
                 로드 중...
             </iframe>
         </div>
 
         <div class="footer-counter">
-            <p style="color: #64748b; font-size: 12px; margin-bottom: 10px; font-weight: bold;">TOTAL VISITORS</p>
+            <p style="color: #64748b; font-size: 12px; margin-bottom: 8px; font-weight: bold;">TOTAL VISITORS</p>
             <div style="display: inline-block; padding: 8px 20px; border: 2px solid #fbbf24; background: #000; border-radius: 4px;">
-                <span style="color: #fbbf24; font-size: 20px; font-weight: bold;">LIVE <span id="visit-number">1,052</span></span>
+                <span style="color: #fbbf24; font-size: 18px; font-weight: bold;">LIVE <span id="visit-number">1,052</span></span>
             </div>
-            <div style="margin-top: 40px; color: #94a3b8; font-size: 11px;">ⓒ VIP FOCUS PRINCIPLE. All Rights Reserved.</div>
+            <div style="margin-top: 30px; color: #94a3b8; font-size: 11px;">ⓒ VIP FOCUS PRINCIPLE. All Rights Reserved.</div>
         </div>
     </div>
 </div>
