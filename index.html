@@ -7,174 +7,214 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Montserrat:wght@900&family=JetBrains+Mono:wght@700&display=swap');
         
-        /* [배경: 미드나잇 네이비 블랙] */
         body { 
             font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; 
-            background: #00020a; color: #f8fafc; overflow-x: hidden; word-break: keep-all; 
+            background: #000210; color: #f8fafc; overflow-x: hidden; word-break: keep-all; 
             position: relative; min-height: 100vh;
         }
 
-        /* [★ 핵심: 전체 화면 골드 반짝이 테두리 ★] */
+        /* [1. 배경 금가루 효과] */
+        #particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+
+        /* [2. 골드 반짝이 테두리] */
         body::after {
             content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            border: 8px solid transparent;
-            border-image: linear-gradient(45deg, #fbbf24, #fff, #d4af37, #fbbf24, #fff);
-            border-image-slice: 1;
-            z-index: 9999; pointer-events: none; /* 클릭 방해 금지 */
-            animation: border-glow 3s linear infinite;
+            border: 8px solid transparent; border-image: linear-gradient(45deg, #fbbf24, #fff, #d4af37, #fbbf24, #fff);
+            border-image-slice: 1; z-index: 9999; pointer-events: none; animation: border-glow 2s linear infinite;
         }
-        @keyframes border-glow {
-            0%, 100% { filter: brightness(1) drop-shadow(0 0 5px #fbbf24); }
-            50% { filter: brightness(1.5) drop-shadow(0 0 20px #fbbf24); }
-        }
+        @keyframes border-glow { 0%, 100% { filter: brightness(1.2) drop-shadow(0 0 10px #fbbf24); } 50% { filter: brightness(1.8) drop-shadow(0 0 25px #fbbf24); } }
 
-        /* 배경 입자 효과 */
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px), radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px);
-            background-size: 550px 550px, 350px 350px;
-            animation: backgroundStarMove 60s linear infinite; opacity: 0.3; z-index: 0;
-        }
-        @keyframes backgroundStarMove { from { background-position: 0 0; } to { background-position: -1000px 500px; } }
-
-        .neon-lines {
-            position: fixed; top: -50%; left: -50%; width: 200%; height: 200%;
-            background-image: linear-gradient(45deg, rgba(251, 191, 36, 0.07) 1px, transparent 1px), linear-gradient(-45deg, rgba(251, 191, 36, 0.07) 1px, transparent 1px);
-            background-size: 60px 60px; z-index: 1; animation: diamondMove 20s linear infinite;
-        }
-        @keyframes diamondMove { 0% { transform: translate(0, 0) rotateX(20deg); } 100% { transform: translate(60px, 60px) rotateX(20deg); } }
-
-        /* 로고 영역 */
+        /* [3. 포커스 시그니처 로고] */
         .logo-wrapper { padding: 80px 0 20px; text-align: center; position: relative; z-index: 10; }
         .brand-logo { display: inline-flex; align-items: center; justify-content: center; animation: logo-glow-pulse 4s infinite ease-in-out; }
-        .logo-text { font-size: 42px; letter-spacing: 0.15em; color: #fff; text-shadow: 0 0 10px #fff; font-weight: 900; margin-right: 15px; }
+        .logo-text { font-size: 42px; letter-spacing: 0.15em; color: #fff; text-shadow: 0 0 15px #fff, 0 0 30px #fbbf24; font-weight: 900; margin-right: 15px; }
         .logo-symbol { 
             width: 38px; height: 38px; border: 4px solid #fbbf24; border-radius: 8px; 
-            transform: rotate(45deg); box-shadow: 0 0 15px #fbbf24; animation: symbol-rotate 4s infinite;
-            position: relative;
+            transform: rotate(45deg); box-shadow: 0 0 20px #fbbf24; animation: symbol-rotate 4s infinite; position: relative;
         }
-        .logo-symbol::after {
-            content: ''; position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%); width: 12px; height: 12px; 
-            background: #fbbf24; border-radius: 50%; box-shadow: 0 0 8px #fbbf24;
-        }
+        .logo-symbol::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; background: #fbbf24; border-radius: 50%; box-shadow: 0 0 10px #fbbf24; }
         @keyframes symbol-rotate { 0% { transform: rotate(45deg); } 80%, 100% { transform: rotate(405deg); } }
+        @keyframes logo-glow-pulse { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.05); filter: brightness(1.3); } }
 
-        header { text-align: center; padding: 10px 20px 100px; position: relative; z-index: 10; }
-        h1 { font-size: 36px; font-weight: 900; line-height: 1.3; color: #fff; }
-        .gold { color: #fbbf24; text-shadow: 0 0 15px rgba(251, 191, 36, 0.5); }
+        header { text-align: center; padding: 10px 20px 60px; position: relative; z-index: 10; }
+        h1 { font-size: 38px; font-weight: 900; line-height: 1.3; color: #fff; }
+        .gold { color: #fbbf24; text-shadow: 0 0 20px rgba(251, 191, 36, 0.8); }
         
-        .container { max-width: 500px; margin: -70px auto 30px; position: relative; z-index: 10; padding: 0 20px; }
+        .container { max-width: 500px; margin: -40px auto 30px; position: relative; z-index: 10; padding: 0 20px; }
 
-        /* 혜택 박스 */
+        .intro-section { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 30px 20px; text-align: center; margin-bottom: 30px; backdrop-filter: blur(10px); }
+        .intro-title { color: #fbbf24; font-size: 22px; font-weight: 900; text-shadow: 0 0 15px rgba(251, 191, 36, 0.6); margin-bottom: 15px; }
+        .intro-desc { font-size: 16px; line-height: 1.6; color: #cbd5e1; font-weight: 400; }
+
         .benefit-box { 
-            background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24); 
-            padding: 30px 15px; border-radius: 24px; text-align: center; 
-            border: 2px solid #fff; margin-bottom: 30px; 
-            box-shadow: 0 0 35px rgba(251, 191, 36, 0.7);
+            background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24); padding: 30px 15px; border-radius: 24px; text-align: center; 
+            border: 2px solid #fff; margin-bottom: 30px; box-shadow: 0 0 35px rgba(251, 191, 36, 0.7);
         }
-        .benefit-label { font-size: 13px; font-weight: 700; color: #1a1a1a; display: block; margin-bottom: 8px; }
-        .benefit-val { 
-            font-size: 28px; font-weight: 900; color: #b91c1c; 
-            display: block; text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
-        }
+        .benefit-val { font-size: 28px; font-weight: 900; color: #b91c1c; display: block; text-shadow: 1px 1px 1px rgba(255,255,255,0.4); }
 
-        /* 홍보 문구 */
-        .promo-box { 
-            background: rgba(7, 10, 20, 0.8); padding: 30px 25px; border-radius: 24px; text-align: center; 
-            border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 30px; 
-            animation: promo-glow-pulse 3s infinite ease-in-out;
+        .content-section { background: rgba(255, 255, 255, 0.05); padding: 35px 25px; border-radius: 24px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.1); }
+        .point-item { display: flex; align-items: center; margin-bottom: 22px; font-size: 16px; color: #fff; font-weight: 700; line-height: 1.4; }
+        .diamond-icon {
+            width: 14px; height: 14px; background: #fbbf24; margin-right: 15px; transform: rotate(45deg);
+            box-shadow: 0 0 10px #fbbf24; animation: diamond-shine 1.5s infinite ease-in-out; flex-shrink: 0;
         }
-        .promo-main { font-size: 21px; font-weight: 900; color: #fbbf24; text-shadow: 0 0 10px #fbbf24; display: block; margin-bottom: 14px; }
+        @keyframes diamond-shine { 0%, 100% { transform: rotate(45deg) scale(1); filter: brightness(1); } 50% { transform: rotate(45deg) scale(1.3); filter: brightness(1.8); } }
 
-        /* 체크리스트 */
-        .content-section { background: rgba(255, 255, 255, 0.02); padding: 35px 25px; border-radius: 24px; margin-bottom: 40px; border: 1px solid rgba(255,255,255,0.05); }
-        .point-item { display: flex; align-items: flex-start; margin-bottom: 22px; font-size: 16px; color: #e2e8f0; }
-        .point-icon {
-            width: 14px; height: 14px; border: 2.5px solid #fbbf24; border-radius: 3px;
-            transform: rotate(45deg); box-shadow: 0 0 8px #fbbf24;
-            display: inline-block; margin-right: 18px; margin-top: 5px; animation: symbol-rotate 4s infinite; position: relative;
-        }
-        .point-icon::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 4.5px; height: 4.5px; background: #fbbf24; border-radius: 50%; }
+        .ticker-wrapper { background: linear-gradient(90deg, rgba(251, 191, 36, 0.1), rgba(0,0,0,0.9), rgba(251, 191, 36, 0.1)); border-top: 1px solid #fbbf24; border-bottom: 1px solid #fbbf24; padding: 15px 0; margin-bottom: 35px; overflow: hidden; height: 30px; position: relative; }
+        #profit-ticker { position: absolute; width: 100%; text-align: center; font-weight: 900; color: #4ade80; font-size: 18px; text-shadow: 0 0 10px rgba(74, 222, 128, 0.5); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
-        /* 신청 폼 */
-        .form-wrap { position: relative; padding: 8px; border-radius: 25px; background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24); animation: form-glow 2s infinite ease-in-out; }
-        @keyframes form-glow { 0%, 100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.3); } 50% { box-shadow: 0 0 50px rgba(251, 191, 36, 0.8); } }
+        .form-wrap { position: relative; padding: 8px; border-radius: 25px; background: linear-gradient(135deg, #fbbf24, #d4af37, #fbbf24); box-shadow: 0 0 40px rgba(251, 191, 36, 0.6); }
         iframe { width: 100%; height: 500px; border-radius: 20px; border: none; background: #000; display: block; }
-
-        /* 하단 시계 */
-        .clock-section { margin-top: 50px; text-align: center; padding-bottom: 40px; }
-        .clock-label { color: #fbbf24; font-size: 11px; letter-spacing: 3px; margin-bottom: 8px; display: block; font-weight: 700; }
-        .clock-badge { 
-            display: inline-block; padding: 10px 25px; border: 1.5px solid rgba(251, 191, 36, 0.5); 
-            border-radius: 10px; background: rgba(0, 0, 0, 0.6); color: #fbbf24; 
-            font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: bold; 
-        }
-
-        .footer { text-align: center; font-size: 11px; color: #475569; padding: 20px 0; }
+        .clock-badge { display: inline-block; padding: 12px 30px; border: 2px solid #fbbf24; border-radius: 12px; background: #000; color: #fbbf24; font-family: 'JetBrains Mono'; font-size: 22px; font-weight: bold; margin-top: 50px; }
+        .footer { text-align: center; font-size: 11px; color: #475569; padding: 40px 0; position: relative; z-index: 10; }
     </style>
 </head>
 <body>
 
-<div class="neon-lines"></div>
+<div id="particles-js"></div>
 
 <header>
     <div class="logo-wrapper">
         <div class="brand-logo"><span class="logo-text">FOCUS</span><div class="logo-symbol"></div></div>
     </div>
-    <span style="color: #fbbf24; font-weight: 700; font-size: 14px; letter-spacing: 4px; margin-bottom: 15px; display: block;">PREMIUM INVESTMENT PRINCIPLE</span>
+    <span style="color: #fbbf24; font-weight: 700; font-size: 14px; letter-spacing: 4px; display: block; margin-bottom: 15px;">PREMIUM INVESTMENT</span>
     <h1>손실 없는 투자 원칙<br><span class="gold">VIP (포커스)</span></h1>
 </header>
 
 <div class="container">
+    <div class="intro-section">
+        <div class="intro-title">[변동성 시장의 해답, 해외 선물]</div>
+        <div class="intro-desc">복합한 시장 분석은 전문가에게 맡기시고,<br>당신은 수익에 집중하세요!</div>
+    </div>
+
     <div class="benefit-box">
         <div style="display: flex; justify-content: space-around; align-items: center;">
-            <div><span class="benefit-label">초기 매입금 지원</span><span class="benefit-val">20% 즉시지급</span></div>
+            <div><span style="color:#1a1a1a; font-weight:700;">초기 매입금</span><span class="benefit-val">20% 지원</span></div>
             <div style="width: 1px; height: 50px; background: rgba(0,0,0,0.1);"></div>
-            <div><span class="benefit-label">해외선물 수수료</span><span class="benefit-val">$2.0 최저가</span></div>
+            <div><span style="color:#1a1a1a; font-weight:700;">선물 수수료</span><span class="benefit-val">$2.0 최저</span></div>
         </div>
     </div>
 
-    <div class="promo-box">
-        <span class="promo-main">[변동성 시장의 해답, 해외 선물]</span>
-        <span style="color: #cbd5e1; font-size: 17px; line-height: 1.6;">복합한 시장 분석은 전문가에게 맡기시고,<br>당신은 수익에 집중하세요!</span>
+    <div class="content-section">
+        <div class="point-item"><div class="diamond-icon"></div><span>상방/하방 구애받지 않는 '양방향' 타점 실시간 공유</span></div>
+        <div class="point-item"><div class="diamond-icon"></div><span>해외선물 수익 극대화를 위한 체계적 리스크 헷지</span></div>
+        <div class="point-item"><div class="diamond-icon"></div><span>수년간 검증된 포커스만의 독보적인 시장 분석 노하우</span></div>
     </div>
 
-    <div class="content-section">
-        <div class="point-item"><div class="point-icon"></div><span>상방/하방 구애받지 않는 '양방향' 타점 실시간 공유</span></div>
-        <div class="point-item"><div class="point-icon"></div><span>해외선물 수익 극대화를 위한 체계적 리스크 헷지</span></div>
-        <div class="point-item"><div class="point-icon"></div><span>수년간 검증된 포커스만의 독보적인 시장 분석 노하우</span></div>
+    <div class="ticker-wrapper">
+        <div id="profit-ticker">해외 선물 실시간 데이터 연결 중...</div>
     </div>
 
     <div style="text-align: center;">
-        <p style="color: #fbbf24; margin-bottom: 25px; font-weight: 900; font-size: 20px;">▼ 실시간 VIP 상담 신청 ▼</p>
+        <p style="color: #fbbf24; margin-bottom: 25px; font-weight: 900; font-size: 22px; text-shadow: 0 0 10px #fbbf24;">▼ 실시간 VIP 상담 신청 ▼</p>
         <div class="form-wrap">
             <iframe src="https://tally.so/embed/2EkdBM?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"></iframe>
         </div>
     </div>
 
-    <div class="clock-section">
-        <span class="clock-label">KOREA STANDARD TIME</span>
+    <div style="text-align: center; padding-bottom: 40px;">
         <div class="clock-badge" id="live-clock">00:00:00</div>
     </div>
 
-    <div class="footer">ⓒ VIP FOCUS PRINCIPLE. All Rights Reserved.</div>
+    <div class="footer">ⓒ VIP FOCUS. All Rights Reserved.</div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 80 }, "color": { "value": "#fbbf24" }, "shape": { "type": "circle" },
+            "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true },
+            "line_linked": { "enable": false },
+            "move": { "enable": true, "speed": 1.5, "direction": "bottom", "random": true, "straight": false, "out_mode": "out" }
+        }
+    });
+
+    const profitData = [
+        "이** 회원님 [나스닥] +1,420,000원 익절 완료",
+        "★긴급★ 지금 신청 시 초기 매입금 20% 즉시지원",
+        "김** 님 6,800,000원 전액 출금 신청 완료",
+        "포커스_박** 님 신호 적중 +880,000원 달성",
+        "최** 님 [항셍] 오전장 +2,300,000원 수익",
+        "정** 님 VIP 리딩 4연승 +560,000원 안착",
+        "강** 회원님 +1,250,000원 수익 인증 완료",
+        "VIP_한** 님 +3,400,000원 복구 성공!",
+        "포커스_오** 님 누적 수익 1,000만 원 돌파",
+        "지후매니저 실시간 타점 +2,100,000원 적중!",
+        "신규_이** 님 [20% 지원금 적용] +1,420,000원 수익",
+        "김** 님 지원금 수령 후 [나스닥] +880,000원 익절",
+        "현재 지원금 잔여 티켓 [2자리] 남았습니다 (마감임박)",
+        "정** 님 지원금 포함 손실 복구 완료 +3,400,000원",
+        "서** 님 [골드] 단타 +1,150,000원 수익인증",
+        "신** 회원님 [오일] 70틱 돌파 +950,000원",
+        "VIP_송** 님 3,000,000원 출금 승인 대기",
+        "윤** 님 20% 지원금 포함 +1,400,000원 시작",
+        "조** 님 리딩 신호 진입 +700,000원 안착",
+        "임** 회원님 [항셍] 상방 돌파 +3,150,000원",
+        "유** 님 야간 나스닥 +2,100,000원 청산 완료",
+        "포커스_황** 님 누적 수익 2,500만 원 달성",
+        "고** 님 [오일] 매도 포지션 +1,220,000원",
+        "권** 님 3일 연속 익절 +4,500,000원 돌파",
+        "손** 회원님 신규 입금 후 첫 신호 +600,000원",
+        "VIP_배** 님 원금 회복 완료! +5,500,000원",
+        "안** 님 [골드] 매수 타점 +1,350,000원 적중",
+        "홍** 님 [나스닥] 150틱 수익 +2,800,000원",
+        "전** 회원님 오후장 수익 마감 +900,000원",
+        "양** 님 실시간 20% 지원 혜택 막차 탑승 완료",
+        "백** 님 [20% 지원금 수령] 실전 수익 +1,950,000원",
+        "최** 님 [나스닥] 매수 신호 적중 +1,700,000원",
+        "강** 회원님 20% 지원금 혜택 입금 확인완료",
+        "포커스_한** 님 [나스닥] 매도 대응 +1,240,000원",
+        "지후매니저 전담 타점 -> 5연승 달성",
+        "오** 님 [항셍] 매도 80틱 수익 +1,550,000원",
+        "VIP_한** 님 오늘 수익금 4,200,000원 전액출금",
+        "신규 가입자 20% 지원금 지급 누적 5억 돌파!",
+        "윤** 회원님 [오일] 변동성 대응 +1,100,000원",
+        "포커스_유** 님 리딩 준수 월 평균 2,000만 달성",
+        "고** 님 [골드] 매도 타점 진입 중 +750,000원",
+        "전** 님 [20% 지원금 적용] 고수익 인증 완료",
+        "임** 님 1:1 밀착 리딩 신청 및 승인 완료",
+        "남** 님 주간 수익률 240% 달성 (포커스 VIP)",
+        "허** 님 [항셍] 야간장 +2,900,000원 익절 완료",
+        "배** 회원님 손실 복구 프로젝트 1단계 성공",
+        "조** 님 [나스닥] 눌림목 매수 진입 +1,300,000원",
+        "★알림★ 20% 지원금 혜택 마지막 1분 모십니다",
+        "홍** 님 [오일] 익절 랠리 +1,850,000원 안착",
+        "송** 님 해외선물 초보자 지원금 활용 수익 시작",
+        "안** 회원님 실시간 신호 진입 수익 +920,000원",
+        "양** 님 [20% 지원금 포함] 당일 출금 완료",
+        "백** 님 [골드] 반등 타점 적중 +1,120,000원 수익",
+        "권** 님 포커스 시그니처 신호 +2,500,000원 적중",
+        "황** 회원님 [나스닥] 전고점 돌파 +3,800,000원",
+        "신규_서** 님 입금 20% 지원금 즉시 지급 완료",
+        "고** 님 누적 익절 횟수 50회 돌파 기념 수익",
+        "이** 님 [항셍] 역추세 대응 +1,450,000원",
+        "강** 님 지원금 활용 -> 나스닥 120틱 익절",
+        "VIP 포커스 상담 폭주로 순차적 연락 드립니다"
+    ];
+
+    profitData.sort(() => Math.random() - 0.5);
+    let tickerIdx = 0;
+    function rotateTicker() {
+        const ticker = document.getElementById('profit-ticker');
+        ticker.style.opacity = '0'; ticker.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+            ticker.innerText = profitData[tickerIdx];
+            ticker.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                ticker.style.opacity = '1'; ticker.style.transform = 'translateY(0)';
+                tickerIdx = (tickerIdx + 1) % profitData.length;
+            }, 50);
+        }, 400);
+    }
+    setInterval(rotateTicker, 3000);
+
     function updateClock() {
         const now = new Date();
-        const kstOffset = 9 * 60 * 60 * 1000;
-        const utc = now.getTime() + (now.getTimezoneOffset() * 60 * 1000);
-        const kstTime = new Date(utc + kstOffset);
-        const hours = String(kstTime.getHours()).padStart(2, '0');
-        const minutes = String(kstTime.getMinutes()).padStart(2, '0');
-        const seconds = String(kstTime.getSeconds()).padStart(2, '0');
-        document.getElementById('live-clock').innerText = `${hours}:${minutes}:${seconds}`;
+        const kstTime = new Date(now.getTime() + (now.getTimezoneOffset() * 60 * 1000) + (9 * 60 * 60 * 1000));
+        document.getElementById('live-clock').innerText = kstTime.toTimeString().split(' ')[0];
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+    setInterval(updateClock, 1000); updateClock();
 </script>
-
 </body>
 </html>
